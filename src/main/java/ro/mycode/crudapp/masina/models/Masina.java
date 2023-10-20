@@ -22,6 +22,8 @@ public class Masina implements Comparable<Masina> {
     private String marca;
     private int model;
     private int pret;
+
+
     @Override
     public int compareTo(Masina o) {
         return 0;
