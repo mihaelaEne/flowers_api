@@ -12,7 +12,7 @@ import java.util.Optional;
 
 
 @Repository
-public interface MasinaRepo extends JpaRepository<Masina,Long> {
+    public interface MasinaRepo extends JpaRepository<Masina,Long> {
     @Query("select distinct m.marca from Masina m")
     List<String>getAllMarci();
 
@@ -24,6 +24,16 @@ public interface MasinaRepo extends JpaRepository<Masina,Long> {
     @Modifying
     @Query("update Masina m set m.pret = ?3  where m.marca = ?1 and  m.model= ?2")
     void masinaUpdate( String marca, int model,int pret);
+
+    @Query("select m from Masina m where m.pret between :minPret and :maxPret")
+    List<Masina> findMasiniByPretRange(int minPret, int maxPret);
+
+    @Query("select m from Masina m order by m.pret asc")
+    List<Masina> findAllOrderByPretAsc();
+
+    @Query("select count(m) from Masina m where m.marca = :marca")
+    int countMasiniByMarca(String marca);
+
 
 
 }
