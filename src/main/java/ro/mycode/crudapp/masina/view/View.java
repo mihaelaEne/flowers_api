@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ro.mycode.crudapp.masina.models.Masina;
 import ro.mycode.crudapp.masina.repository.MasinaRepo;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -112,18 +113,42 @@ public class View {
         if(masina.isPresent()){
             System.out.println("Introduceti noul pret: ");
             int pretNou=Integer.parseInt(scanner.nextLine());
-
-
             Masina masina1 = masina.get();
-
             masina1.setPret(pretNou);
-
             masinaRepo.saveAndFlush(masina1);
             System.out.println("S-a updatat");
+            //todo:clean
         }else{
             System.out.println("Masina nu exista");
         }
 
     }
+
+// sa imi caute masini dupa prert
+    public void cautareMasiniDupaPret() {
+        System.out.println("Introduceti pretul minim: ");
+        int minPret = Integer.parseInt(scanner.nextLine());
+        System.out.println("Introduceti pretul maxim: ");
+        int maxPret = Integer.parseInt(scanner.nextLine());
+
+        List<Masina> masini = masinaRepo.findMasiniByPretRange(minPret, maxPret);
+        masini.forEach(System.out::println);
+    }
+
+  //sa sorteze
+    public void sortareMasiniDupaPret() {
+        List<Masina> masini = masinaRepo.findAllOrderByPretAsc();
+        masini.forEach(System.out::println);
+    }
+
+    public void afisareMasinaDeTip() {
+        System.out.println("Introduceti marca: ");
+        String marca = scanner.nextLine();
+        int numarMasini = masinaRepo.countMasiniByMarca(marca);
+        System.out.println("Numarul de masini de marca " + marca + " este: " + numarMasini);
+    }
+
+
+
 
 }

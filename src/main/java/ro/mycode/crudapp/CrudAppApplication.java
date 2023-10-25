@@ -25,7 +25,7 @@ public class CrudAppApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(MasinaRepo masinaRepo , View view){
 		return  args->{
-	 view.play();;
+	//view.play();
 //			Optional<Masina> masina=masinaRepo.findMasinaByMarcaAndModel("Q",1999);
 //			if(masina.isPresent()){
 //				System.out.println(masina.get());
@@ -33,6 +33,9 @@ public class CrudAppApplication {
 //
 //				System.out.println("Masina nu exista");
 //			}
+
+
+
 
 		};
 	}
